@@ -1,5 +1,6 @@
 <?php
-/*SNACK 1
+/*
+SNACK 1
 Creare una funzione che restituisce un array con 15 numeri casuali, tenendo conto che l’array non dovrà contenere lo stesso numero più di una volta. Stampare i numeri in pagina.
 SNACK 2
 Creare un array contenente qualche alunno di un’ipotetica classe.
@@ -15,14 +16,21 @@ SUPER BONUS: Personalizzare l'avviso di accesso negato con la motivazione. es: (
 */
 
 
-$numbers = [];
-while (count($numbers) < 15) {
-    $random_number = rand(1, 100);
-    //controllo che non ci sia il numero appena scelto
-    if (!in_array($random_number, $number)) $number[] = $random_number;
+function random_numbers_generate($min_number, $max_number, $n_times)
+{
+    //controllo della differenza di inserimento dei numeri (min, max) sul totale che deve restituire (n_times)
+    $diff_max_min = $max_number - $min_number + 1;
+    if ($diff_max_min < $n_times) $n_times = $diff_max_min;
+
+    $total_numbers = [];
+
+    while (count($total_numbers) < $n_times) {
+        $actual_numbers = rand($min_number, $max_number);
+        //controllo che non ci sia il numero appena scelto
+        if (!in_array($actual_numbers, $total_numbers)) $total_numbers[] = $actual_numbers;
+    }
+    return $total_numbers;
 }
-
-
 
 ?>
 
@@ -38,7 +46,12 @@ while (count($numbers) < 15) {
 </head>
 
 <body>
+    <h1><?php foreach (random_numbers_generate(1, 100, 15) as $number) echo "$number " ?></h1>
+    <hr>
 
+    <div>
+
+    </div>
 </body>
 
 </html>
