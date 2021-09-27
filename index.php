@@ -1,11 +1,5 @@
 <?php
 /*
-SNACK 1
-Creare una funzione che restituisce un array con 15 numeri casuali, tenendo conto che l’array non dovrà contenere lo stesso numero più di una volta. Stampare i numeri in pagina.
-SNACK 2
-Creare un array contenente qualche alunno di un’ipotetica classe.
-Ogni alunno avrà Nome, Cognome e un array contenente i suoi voti scolastici (senza, materia, solo numeri). Creare una funzione che calcoli la media voto di un alunno.
-Stampare Nome, Cognome e la media dei voti di ogni alunno.
 BONUS SNACK
 Passare come parametri GET name, mail e age e verificare (cercando i metodi che non conosciamo nella documentazione)
 -che name sia più lungo di 3 caratteri,
@@ -15,24 +9,14 @@ Passare come parametri GET name, mail e age e verificare (cercando i metodi che 
 SUPER BONUS: Personalizzare l'avviso di accesso negato con la motivazione. es: ("Accesso negato: mail non valida")
 */
 
+require_once __DIR__ . '/snack1.php';
+require_once __DIR__ . '/snack2.php';
 
-function random_numbers_generate($min_number, $max_number, $n_times)
-{
-    //controllo della differenza di inserimento dei numeri (min, max) sul totale che deve restituire (n_times)
-    $diff_max_min = $max_number - $min_number + 1;
-    if ($diff_max_min < $n_times) $n_times = $diff_max_min;
-
-    $total_numbers = [];
-
-    while (count($total_numbers) < $n_times) {
-        $actual_numbers = rand($min_number, $max_number);
-        //controllo che non ci sia il numero appena scelto
-        if (!in_array($actual_numbers, $total_numbers)) $total_numbers[] = $actual_numbers;
-    }
-    return $total_numbers;
-}
 
 ?>
+
+
+
 
 
 <!DOCTYPE html>
@@ -50,7 +34,10 @@ function random_numbers_generate($min_number, $max_number, $n_times)
     <hr>
 
     <div>
-
+        <?php foreach ($students as $student) : ?>
+            <h2><?php echo $student['name'] . ' ' . $student['Lastname'] ?></h2>
+            <h5><?php echo get_medium($student['votes']) ?></h5>
+        <?php endforeach ?>
     </div>
 </body>
 
